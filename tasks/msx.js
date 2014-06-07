@@ -36,8 +36,6 @@ module.exports = function (grunt) {
         }
       }).map(function (filepath) {
         // Read file source.
-        console.log(file)
-        console.log(filepath)
         var src = grunt.util.normalizelf(msx.transform(grunt.file.read(filepath)));
         var path = file.dest.replace('jsx', 'js');
 

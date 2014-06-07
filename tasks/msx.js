@@ -26,7 +26,7 @@ module.exports = function (grunt) {
     // Iterate over all specified file groups.
     this.files.forEach(function (file) {
       // Concat specified files.
-      var src = file.src.filter(function (filepath) {
+      file.src.filter(function (filepath) {
         // Warn on and remove invalid source files (if nonull was set).
         if (!grunt.file.exists(filepath)) {
           grunt.log.warn('Source file "' + chalk.red(filepath) + '" not found.');
@@ -36,14 +36,15 @@ module.exports = function (grunt) {
         }
       }).map(function (filepath) {
         // Read file source.
-        return msx.transform(grunt.file.read(filepath));
-      }).join(grunt.util.normalizelf(options.separator));
+        var src = grunt.util.normalizelf(msx.transform(grunt.file.read(filepath)));
+        var path = file.dest + '/' + filepath.split('/').pop().replace('jsx', 'js');
 
-      // Write the destination file.
-      grunt.file.write(file.dest, src);
+        // Write the destination file.
+        grunt.file.write(path, src);
 
-      // Print a success message.
-      grunt.log.writeln('File "' + chalk.cyan(file.dest) + '" created.');
+        // Print a success message.
+        return grunt.log.writeln('File "' + chalk.cyan(path) + '" created.');
+      });
     });
   });
 

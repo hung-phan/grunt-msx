@@ -45,8 +45,10 @@ grunt.initConfig({
   msx: {
     app: {
       files: [{
+        expand: true,
+        cwd: 'test/fixtures',
+        src  : '**/*.jsx',
         dest : 'test/expected',
-        src  : 'test/fixtures/*.jsx'
       }]
     }
   },

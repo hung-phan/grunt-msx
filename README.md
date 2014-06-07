@@ -1,4 +1,4 @@
-# grunt-msx
+# grunt-msx [![Build Status](https://secure.travis-ci.org/hung-phan/grunt-msx.png?branch=master)](https://travis-ci.org/hung-phan/grunt-msx)
 
 > Precompile Mithril views which use JSX into JavaScript by insin
 

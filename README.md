@@ -38,7 +38,7 @@ Working on
 ### Usage Examples
 
 #### Default Options
-In this example, the `app` option are used to convert all files matched `test/fixtures/*.jsx` to Mithril views in test/expected.
+In this example, the `app` option are used to convert all files matched `test/fixtures/*.jsx` to Mithril views.
 
 ```js
 grunt.initConfig({

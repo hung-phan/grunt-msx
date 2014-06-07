@@ -13,12 +13,14 @@ module.exports = function (grunt) {
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
+  var chalk = require('chalk');
+  var msx = require('msx');
+
   grunt.registerMultiTask('msx', 'Precompile Mithril views which use JSX into JavaScript by insin', function () {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      punctuation: '.',
-      separator: ', '
+        // no option for now
     });
 
     // Iterate over all specified file groups.
@@ -27,24 +29,21 @@ module.exports = function (grunt) {
       var src = file.src.filter(function (filepath) {
         // Warn on and remove invalid source files (if nonull was set).
         if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
+          grunt.log.warn('Source file "' + chalk.red(filepath) + '" not found.');
           return false;
         } else {
           return true;
         }
       }).map(function (filepath) {
         // Read file source.
-        return grunt.file.read(filepath);
+        return msx.transform(grunt.file.read(filepath));
       }).join(grunt.util.normalizelf(options.separator));
-
-      // Handle options.
-      src += options.punctuation;
 
       // Write the destination file.
       grunt.file.write(file.dest, src);
 
       // Print a success message.
-      grunt.log.writeln('File "' + file.dest + '" created.');
+      grunt.log.writeln('File "' + chalk.cyan(file.dest) + '" created.');
     });
   });
 

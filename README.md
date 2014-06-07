@@ -25,9 +25,6 @@ In your project's Gruntfile, add a section named `msx` to the data object passed
 ```js
 grunt.initConfig({
   msx: {
-    options: {
-      // Task-specific options go here.
-    },
     your_target: {
       // Target-specific file lists and/or options go here.
     },
@@ -36,38 +33,81 @@ grunt.initConfig({
 ```
 
 ### Options
+Working on
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the `app` option are used to convert all files matched `test/fixtures/*.jsx` to Mithril views in test/expected.
 
 ```js
 grunt.initConfig({
   msx: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    app: {
+      files: [{
+        dest : 'test/expected',
+        src  : 'test/fixtures/*.jsx'
+      }]
+    }
   },
 })
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+### Example
+```
+todo.view = function(ctrl) {
+  return <html>
+    <body>
+      <input onchange={m.withAttr("value", ctrl.description)} value={ctrl.description()}/>
+      <button onclick={ctrl.add.bind(ctrl, ctrl.description)}>Add</button>
+      <table>
+        {ctrl.list.map(function(task, index) {
+          return <tr>
+            <td>
+              <input
+                type="checkbox"
+                onclick={m.withAttr("checked", task.done)}
+                checked={task.done()}
+               />
+            </td>
+            <td style={{textDecoration: task.done() ? "line-through" : "none"}}>
+              {task.description()}
+            </td>
+          </tr>
+        })}
+      </table>
+    </body>
+  </html>
+};
+```
 
-```js
-grunt.initConfig({
-  msx: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
+To
+
+```
+todo.view = function(ctrl) {
+  return m("html", [
+    m("body", [
+      m("input", {onchange:m.withAttr("value", ctrl.description), value:ctrl.description()}),
+      m("button", {onclick:ctrl.add.bind(ctrl, ctrl.description)}, ["Add"]),
+      m("table", [
+        ctrl.list.map(function(task, index) {
+          return m("tr", [
+            m("td", [
+              m("input",
+                {type:"checkbox",
+                onclick:m.withAttr("checked", task.done),
+                checked:task.done()}
+               )
+            ]),
+            m("td", {style:{textDecoration: task.done() ? "line-through" : "none"}}, [
+              task.description()
+            ])
+          ])
+        })
+      ])
+    ])
+  ])
+};
 ```
 
 ## Contributing

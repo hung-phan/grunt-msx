@@ -1,6 +1,6 @@
 {
   "name": "grunt-msx",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Precompile Mithril views which use JSX into JavaScript by insin",
   "homepage": "https://github.com/hung-phan/grunt-msx",
   "repository": "git://github.com:hung-phan/grunt-msx.git",

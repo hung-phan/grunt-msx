@@ -55,6 +55,20 @@ grunt.initConfig({
 })
 ```
 
+### With Browserify
+
+```js
+browserify: {
+  app: {
+    files: { '<%= yeoman.app %>/scripts/main.js': ['<%= yeoman.app %>/jsx/main.jsx'] },
+    options: {
+      transform: [require('grunt-msx').browserify]
+    }
+  }
+},
+
+```
+
 ### Example
 ```
 todo.view = function(ctrl) {

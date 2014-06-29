@@ -2,6 +2,8 @@
 
 > Precompile Mithril views which use JSX into JavaScript by insin
 
+[![NPM](https://nodei.co/npm/grunt-msx.png?downloads=true)](https://nodei.co/npm/grunt-msx/)
+
 ## Getting Started
 This plugin requires Grunt.
 
